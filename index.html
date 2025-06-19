@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мем с котом на весь экран</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        .meme-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .meme-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+        }
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            width: 100%;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="meme-container">
+        <img id="cat-meme" class="meme-img" src="" alt="Кото-мем">
+        <div class="caption">Кликни для нового мема!</div>
+    </div>
+
+    <script>
+        // Коллекция популярных кошачьих мемов
+        const memes = [
+            "https://i.imgur.com/j5Z3GkQ.jpg",  // Грустный кот
+            "https://i.imgur.com/B0iWivQ.jpg",  // Кот в очках
+            "https://i.imgur.com/UWbKpx8.jpg",  // Кричащий кот
+            "https://i.imgur.com/4vu6Jw1.jpg",  // Умный кот
+            "https://i.imgur.com/8BJ3F5k.jpg"   // Кот-повар
+        ];
+
+        // Загружаем случайный мем при открытии
+        function loadRandomMeme() {
+            const randomIndex = Math.floor(Math.random() * memes.length);
+            document.getElementById('cat-meme').src = memes[randomIndex];
+        }
+
+        // Меняем мем по клику
+        document.addEventListener('DOMContentLoaded', loadRandomMeme);
+        document.getElementById('cat-meme').addEventListener('click', loadRandomMeme);
+    </script>
+</body>
+</html>
