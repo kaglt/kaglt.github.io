@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мем с котом на весь экран</title>
+    <title>5 кото-мемов</title>
     <style>
         body, html {
             margin: 0;
@@ -11,57 +11,124 @@
             height: 100%;
             overflow: hidden;
             background: #000;
+            font-family: Arial, sans-serif;
         }
-        .meme-container {
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .slide {
+            position: absolute;
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .meme-img {
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            cursor: pointer;
         }
-        .caption {
+        .controls {
             position: absolute;
             bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        .btn {
+            background: rgba(255,255,255,0.3);
+            border: none;
             color: white;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            width: 100%;
-            font-size: 24px;
-            text-shadow: 2px 2px 4px #000;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: rgba(255,255,255,0.5);
+        }
+        .counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="meme-container">
-        <img id="cat-meme" class="meme-img" src="" alt="Кото-мем">
-        <div class="caption">Кликни для нового мема!</div>
+    <div class="slider">
+        <!-- Слайд 1 -->
+        <div class="slide active">
+            <img src="https://i.imgur.com/j5Z3GkQ.jpg" alt="Грустный кот">
+        </div>
+        <!-- Слайд 2 -->
+        <div class="slide">
+            <img src="https://i.imgur.com/B0iWivQ.jpg" alt="Кот в очках">
+        </div>
+        <!-- Слайд 3 -->
+        <div class="slide">
+            <img src="https://i.imgur.com/UWbKpx8.jpg" alt="Кричащий кот">
+        </div>
+        <!-- Слайд 4 -->
+        <div class="slide">
+            <img src="https://i.imgur.com/4vu6Jw1.jpg" alt="Умный кот">
+        </div>
+        <!-- Слайд 5 -->
+        <div class="slide">
+            <img src="https://i.imgur.com/8BJ3F5k.jpg" alt="Кот-повар">
+        </div>
+
+        <div class="counter">1/5</div>
+        
+        <div class="controls">
+            <button class="btn prev">← Назад</button>
+            <button class="btn next">Вперёд →</button>
+        </div>
     </div>
 
     <script>
-        // Коллекция популярных кошачьих мемов
-        const memes = [
-            "https://i.imgur.com/j5Z3GkQ.jpg",  // Грустный кот
-            "https://i.imgur.com/B0iWivQ.jpg",  // Кот в очках
-            "https://i.imgur.com/UWbKpx8.jpg",  // Кричащий кот
-            "https://i.imgur.com/4vu6Jw1.jpg",  // Умный кот
-            "https://i.imgur.com/8BJ3F5k.jpg"   // Кот-повар
-        ];
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const counter = document.querySelector('.counter');
+        let currentSlide = 0;
 
-        // Загружаем случайный мем при открытии
-        function loadRandomMeme() {
-            const randomIndex = Math.floor(Math.random() * memes.length);
-            document.getElementById('cat-meme').src = memes[randomIndex];
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            counter.textContent = `${currentSlide + 1}/${slides.length}`;
         }
 
-        // Меняем мем по клику
-        document.addEventListener('DOMContentLoaded', loadRandomMeme);
-        document.getElementById('cat-meme').addEventListener('click', loadRandomMeme);
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+        });
+
+        // Автопереключение каждые 5 секунд (по желанию)
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+        }, 5000);
     </script>
 </body>
 </html>
