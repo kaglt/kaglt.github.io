@@ -3,155 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5 свежих кото-мемов</title>
+    <title>Лучшие кото-мемы</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            background: #000;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #111;
+            font-family: 'Arial', sans-serif;
         }
-        .slider-container {
+        .slider {
             position: relative;
             width: 100%;
             height: 100%;
         }
-        .meme-slide {
+        .slide {
             position: absolute;
             width: 100%;
             height: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: opacity 0.8s ease;
         }
-        .meme-slide.active {
+        .slide.active {
             opacity: 1;
         }
-        .meme-slide img {
-            max-width: 95%;
-            max-height: 95%;
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        .slide img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
-        .meme-nav {
+        .caption {
+            color: white;
+            font-size: 24px;
+            margin-top: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px #000;
+            padding: 0 20px;
+        }
+        .controls {
             position: absolute;
             bottom: 30px;
             left: 0;
             right: 0;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            z-index: 100;
+            gap: 15px;
         }
-        .nav-btn {
-            background: rgba(255, 165, 0, 0.7);
-            color: white;
+        .btn {
+            background: rgba(255,255,255,0.2);
             border: none;
+            color: white;
             padding: 12px 25px;
             border-radius: 50px;
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s;
         }
-        .nav-btn:hover {
-            background: rgba(255, 165, 0, 0.9);
-            transform: scale(1.05);
+        .btn:hover {
+            background: rgba(255,255,255,0.4);
         }
-        .meme-counter {
+        .counter {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.6);
             color: white;
+            background: rgba(0,0,0,0.5);
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 16px;
         }
-        .meme-title {
-            position: absolute;
-            bottom: 80px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            text-shadow: 2px 2px 5px black;
-        }
     </style>
 </head>
 <body>
-    <div class="slider-container"
-        <!-- Вставьте этот код вместо старых слайдов -->
-<div class="meme-slide active">
-    <img src="https://placekitten.com/1000/800" alt="Котёнок 1">
-    <div class="meme-title">"Случайный котёнок №1"</div>
-</div>
-<div class="meme-slide">
-    <img src="https://placekitten.com/1024/768" alt="Котёнок 2">
-    <div class="meme-title">"Случайный котёнок №2"</div>
-</div>
-<div class="meme-slide">
-    <img src="https://placekitten.com/800/600" alt="Котёнок 3">
-    <div class="meme-title">"Случайный котёнок №3"</div>
-</div>
-        <div class="meme-counter">1/3</div>
+    <div class="slider">
+        <!-- Слайд 1 -->
+        <div class="slide active">
+            <img src="https://http.cat/images/200.jpg" alt="Довольный кот">
+            <div class="caption">"Когда код работает с первого раза"</div>
+        </div>
         
-        <div class="meme-nav">
-            <button class="nav-btn prev-btn">← Назад</button>
-            <button class="nav-btn next-btn">Вперёд →</button>
+        <!-- Слайд 2 -->
+        <div class="slide">
+            <img src="https://http.cat/images/404.jpg" alt="Кот-программист">
+            <div class="caption">"Когда не нашёл баг в коде"</div>
+        </div>
+        
+        <!-- Слайд 3 -->
+        <div class="slide">
+            <img src="https://http.cat/images/500.jpg" alt="Шокированный кот">
+            <div class="caption">"Когда продакшн упал"</div>
+        </div>
+        
+        <!-- Слайд 4 -->
+        <div class="slide">
+            <img src="https://cataas.com/cat/cute" alt="Милый кот">
+            <div class="caption">"Смотри какие лапки!"</div>
+        </div>
+        
+        <!-- Слайд 5 -->
+        <div class="slide">
+            <img src="https://placekitten.com/800/600" alt="Котёнок">
+            <div class="caption">"Ня!"</div>
+        </div>
+
+        <div class="counter">1/5</div>
+        
+        <div class="controls">
+            <button class="btn prev">← Назад</button>
+            <button class="btn next">Вперёд →</button>
         </div>
     </div>
 
     <script>
-        // Обновлённый скрипт слайдера
-        const slides = document.querySelectorAll('.meme-slide');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const counter = document.querySelector('.meme-counter');
-        let currentIndex = 0;
-        
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[index].classList.add('active');
-            counter.textContent = `${index + 1}/${slides.length}`;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const counter = document.querySelector('.counter');
+        let currentSlide = 0;
+        let autoSlideInterval;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            counter.textContent = `${currentSlide + 1}/${slides.length}`;
         }
-        
+
         function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            showSlide(currentIndex);
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
         }
-        
+
         function prevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            showSlide(currentIndex);
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
         }
-        
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-        
-        // Автопереключение + кнопка паузы
-        let autoSlide = setInterval(nextSlide, 5000);
-        
-        function toggleAutoSlide() {
-            if (autoSlide) {
-                clearInterval(autoSlide);
-                autoSlide = null;
-                nextBtn.textContent = "Старт →";
-            } else {
-                autoSlide = setInterval(nextSlide, 5000);
-                nextBtn.textContent = "Вперёд →";
-            }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 5000);
         }
-        
+
+        // Инициализация
+        updateSlide();
+        startAutoSlide();
+
+        // Обработчики событий
+        prevBtn.addEventListener('click', () => {
+            clearInterval(autoSlideInterval);
+            prevSlide();
+            startAutoSlide();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            clearInterval(autoSlideInterval);
+            nextSlide();
+            startAutoSlide();
+        });
+
         // Горячие клавиши
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === ' ') toggleAutoSlide();
         });
     </script>
 </body>
