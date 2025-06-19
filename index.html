@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лучшие кото-мемы</title>
+    <title>10 крутых котов</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            background: #111;
+            background: #0f0f0f;
             font-family: 'Arial', sans-serif;
         }
         .slider {
@@ -34,17 +34,19 @@
         }
         .slide img {
             max-width: 90%;
-            max-height: 80vh;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            max-height: 75vh;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            object-fit: contain;
         }
         .caption {
             color: white;
             font-size: 24px;
             margin-top: 20px;
             text-align: center;
-            text-shadow: 2px 2px 4px #000;
+            text-shadow: 2px 2px 5px #000;
             padding: 0 20px;
+            max-width: 80%;
         }
         .controls {
             position: absolute;
@@ -53,10 +55,10 @@
             right: 0;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
         }
         .btn {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,165,0,0.7);
             border: none;
             color: white;
             padding: 12px 25px;
@@ -64,19 +66,38 @@
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: bold;
         }
         .btn:hover {
-            background: rgba(255,255,255,0.4);
+            background: rgba(255,165,0,0.9);
+            transform: scale(1.05);
         }
         .counter {
             position: absolute;
             top: 20px;
             right: 20px;
             color: white;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 16px;
+        }
+        .progress-bar {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: orange;
+            width: 0%;
+            transition: width 0.1s linear;
         }
     </style>
 </head>
@@ -84,35 +105,66 @@
     <div class="slider">
         <!-- Слайд 1 -->
         <div class="slide active">
-            <img src="https://http.cat/images/200.jpg" alt="Довольный кот">
-            <div class="caption">"Когда код работает с первого раза"</div>
+            <img src="https://cataas.com/cat?type=1" alt="Рыжий кот">
+            <div class="caption">"Я не спал, я проверял веки на прочность"</div>
         </div>
         
         <!-- Слайд 2 -->
         <div class="slide">
-            <img src="https://http.cat/images/404.jpg" alt="Кот-программист">
-            <div class="caption">"Когда не нашёл баг в коде"</div>
+            <img src="https://cataas.com/cat/cute" alt="Милый кот">
+            <div class="caption">"Смотри какие у меня лапки!"</div>
         </div>
         
         <!-- Слайд 3 -->
         <div class="slide">
-            <img src="https://http.cat/images/500.jpg" alt="Шокированный кот">
-            <div class="caption">"Когда продакшн упал"</div>
+            <img src="https://placekitten.com/800/600" alt="Котёнок">
+            <div class="caption">"Няшка 3000"</div>
         </div>
         
         <!-- Слайд 4 -->
         <div class="slide">
-            <img src="https://cataas.com/cat/cute" alt="Милый кот">
-            <div class="caption">"Смотри какие лапки!"</div>
+            <img src="https://http.cat/images/200.jpg" alt="Довольный кот">
+            <div class="caption">"Когда код работает с первого раза"</div>
         </div>
         
         <!-- Слайд 5 -->
         <div class="slide">
-            <img src="https://placekitten.com/800/600" alt="Котёнок">
-            <div class="caption">"Ня!"</div>
+            <img src="https://http.cat/images/404.jpg" alt="Кот-программист">
+            <div class="caption">"Где баг? WHERE?!"</div>
+        </div>
+        
+        <!-- Слайд 6 -->
+        <div class="slide">
+            <img src="https://http.cat/images/500.jpg" alt="Шокированный кот">
+            <div class="caption">"Продакшн упал в 3 часа ночи"</div>
+        </div>
+        
+        <!-- Слайд 7 -->
+        <div class="slide">
+            <img src="https://cataas.com/cat/says/hello" alt="Кот с текстом">
+            <div class="caption">"Привет, я твой новый мем"</div>
+        </div>
+        
+        <!-- Слайд 8 -->
+        <div class="slide">
+            <img src="https://placekitten.com/600/800" alt="Вертикальный кот">
+            <div class="caption">"Кот в полный рост"</div>
+        </div>
+        
+        <!-- Слайд 9 -->
+        <div class="slide">
+            <img src="https://cataas.com/cat/gif" alt="Кот-гифка">
+            <div class="caption">"Анимированный котик"</div>
+        </div>
+        
+        <!-- Слайд 10 -->
+        <div class="slide">
+            <img src="https://http.cat/images/418.jpg" alt="Чайник кот">
+            <div class="caption">"Я не кот, я чайник!"</div>
         </div>
 
-        <div class="counter">1/5</div>
+        <div class="counter">1/10</div>
+        <div class="progress-bar"><div class="progress"></div></div>
         
         <div class="controls">
             <button class="btn prev">← Назад</button>
@@ -125,51 +177,76 @@
         const prevBtn = document.querySelector('.prev');
         const nextBtn = document.querySelector('.next');
         const counter = document.querySelector('.counter');
+        const progressBar = document.querySelector('.progress');
         let currentSlide = 0;
         let autoSlideInterval;
+        let progressInterval;
+        let isAutoSlide = true;
 
+        // Показ текущего слайда
         function updateSlide() {
             slides.forEach((slide, index) => {
                 slide.classList.toggle('active', index === currentSlide);
             });
             counter.textContent = `${currentSlide + 1}/${slides.length}`;
+            resetProgress();
         }
 
+        // Следующий слайд
         function nextSlide() {
             currentSlide = (currentSlide + 1) % slides.length;
             updateSlide();
         }
 
+        // Предыдущий слайд
         function prevSlide() {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             updateSlide();
         }
 
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(nextSlide, 5000);
+        // Прогресс-бар
+        function resetProgress() {
+            progressBar.style.width = '0%';
+            clearInterval(progressInterval);
+            if (isAutoSlide) {
+                let width = 0;
+                progressInterval = setInterval(() => {
+                    width += 0.5;
+                    progressBar.style.width = `${width}%`;
+                    if (width >= 100) nextSlide();
+                }, 50);
+            }
+        }
+
+        // Автопереключение
+        function toggleAutoSlide() {
+            isAutoSlide = !isAutoSlide;
+            if (isAutoSlide) {
+                nextBtn.textContent = "Вперёд →";
+                resetProgress();
+            } else {
+                clearInterval(progressInterval);
+                nextBtn.textContent = "Старт";
+            }
         }
 
         // Инициализация
         updateSlide();
-        startAutoSlide();
 
         // Обработчики событий
         prevBtn.addEventListener('click', () => {
-            clearInterval(autoSlideInterval);
             prevSlide();
-            startAutoSlide();
         });
 
         nextBtn.addEventListener('click', () => {
-            clearInterval(autoSlideInterval);
             nextSlide();
-            startAutoSlide();
         });
 
         // Горячие клавиши
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === ' ') toggleAutoSlide();
         });
     </script>
 </body>
